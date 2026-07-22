@@ -1,7 +1,3 @@
-
-
-
-
 data = [
     {
         'name': 'Instagram',
@@ -305,24 +301,33 @@ data = [
     }
 ]
 
-import os
-import importlib.util
-from importlib.machinery import SourceFileLoader
+# import os
+# import importlib.util
+# from importlib.machinery import SourceFileLoader
 import random
 
 # Safely load art module that has an invalid filename/module name (e.g. "100dc14-art.py")
+# try:
+#     art_path = os.path.join(os.path.dirname(__file__), '100dc14-art.py')
+#     loader = SourceFileLoader('hl_art', art_path)
+#     spec = importlib.util.spec_from_loader(loader.name, loader)
+#     hl_art = importlib.util.module_from_spec(spec)
+#     loader.exec_module(hl_art)
+#     logo = getattr(hl_art, 'logo')
+#     vs = getattr(hl_art, 'vs')
+# except Exception:
+#     # Fallback placeholders if the art file can't be loaded
+#     logo = """HIGHER LOWER"""
+#     vs = "vs"
+
 try:
-    art_path = os.path.join(os.path.dirname(__file__), '100dc14-art.py')
-    loader = SourceFileLoader('hl_art', art_path)
-    spec = importlib.util.spec_from_loader(loader.name, loader)
-    hl_art = importlib.util.module_from_spec(spec)
-    loader.exec_module(hl_art)
-    logo = getattr(hl_art, 'logo')
-    vs = getattr(hl_art, 'vs')
-except Exception:
-    # Fallback placeholders if the art file can't be loaded
+    import hl_art  
+    logo = hl_art.logo
+    vs = hl_art.vs
+except ImportError:
     logo = """HIGHER LOWER"""
     vs = "vs"
+
 
 accountA = random.choice(data)
 accountB = random.choice(data)
